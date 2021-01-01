@@ -1,0 +1,35 @@
+version: '3.4'
+
+networks:
+  webapplicationwithnginx:
+    driver: bridge
+
+services:
+  reverseproxy:
+    container_name: reverseproxy_webapplicationwithnginx
+    image: ${DOCKER_REGISTRY-}reverseproxy:dev
+    build:
+      context: .
+      dockerfile: ./Nginx/Dockerfile
+    networks:
+      - webapplicationwithnginx
+    ports:
+      - "24051:80"
+      - "44381:443"
+    restart: on-failure
+    depends_on:
+      - webapplicationwithnginx
+    volumes:
+      - /f/pub:/host/pub
+      - ./nginx:/host/certs:ro
+
+  webapplicationwithnginx:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - webapplicationwithnginx
+    ports:
+      - "80"
+    restart: on-failure
+    volumes:
+      - ./ca-certs:/host/ca-certs:ro

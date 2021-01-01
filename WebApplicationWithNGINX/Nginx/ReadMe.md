@@ -1,0 +1,1 @@
+File trusted-certificate-store.pem is concatenation of pems files in ca-certs.

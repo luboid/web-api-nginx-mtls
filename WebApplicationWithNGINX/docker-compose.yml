@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  webapplicationwithnginx:
+    image: ${DOCKER_REGISTRY-}webapplicationwithnginx
+    build:
+      context: .
+      dockerfile: WebApplicationWithNGINX/Dockerfile

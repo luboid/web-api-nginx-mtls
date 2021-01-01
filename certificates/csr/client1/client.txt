@@ -1,0 +1,5 @@
+﻿https://www.digicert.com/kb/ssl-support/openssl-quick-reference-guide.htm
+http://chschneider.eu/linux/server/openssl.shtml
+openssl req -config client.conf -new -newkey rsa:2048 -nodes -keyout client1.pem -out client1.csr
+openssl req -config client.conf -new -newkey rsa:2048 -nodes -keyout client1.pem -out client1.csr -extensions server
+openssl req -text -in client1.csr -noout -verify
